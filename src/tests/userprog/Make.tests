@@ -1,0 +1,40 @@
+# -*- makefile -*-
+
+tests/%.output: FILESYSSOURCE = --filesys-size=2
+tests/%.output: PUTFILES = $(filter-out kernel.bin loader.bin, $^)
+
+tests/userprog_TESTS = $(addprefix tests/userprog/,args-none            \
+args-single args-multiple args-many args-dbl-space sc-bad-sp            \
+sc-bad-arg sc-boundary sc-boundary-2 sc-boundary-3 halt exit            \
+bad-read bad-write bad-jump bad-read2 bad-write2 bad-jump2)
+
+tests/userprog_PROGS = $(tests/userprog_TESTS)
+
+tests/userprog/args-none_SRC = tests/userprog/args.c
+tests/userprog/args-single_SRC = tests/userprog/args.c
+tests/userprog/args-multiple_SRC = tests/userprog/args.c
+tests/userprog/args-many_SRC = tests/userprog/args.c
+tests/userprog/args-dbl-space_SRC = tests/userprog/args.c
+tests/userprog/sc-bad-sp_SRC = tests/userprog/sc-bad-sp.c tests/main.c
+tests/userprog/sc-bad-arg_SRC = tests/userprog/sc-bad-arg.c tests/main.c
+tests/userprog/bad-read_SRC = tests/userprog/bad-read.c tests/main.c
+tests/userprog/bad-write_SRC = tests/userprog/bad-write.c tests/main.c
+tests/userprog/bad-jump_SRC = tests/userprog/bad-jump.c tests/main.c
+tests/userprog/bad-read2_SRC = tests/userprog/bad-read2.c tests/main.c
+tests/userprog/bad-write2_SRC = tests/userprog/bad-write2.c tests/main.c
+tests/userprog/bad-jump2_SRC = tests/userprog/bad-jump2.c tests/main.c
+tests/userprog/sc-boundary_SRC = tests/userprog/sc-boundary.c           \
+tests/userprog/boundary.c tests/main.c
+tests/userprog/sc-boundary-2_SRC = tests/userprog/sc-boundary-2.c       \
+tests/userprog/boundary.c tests/main.c
+tests/userprog/sc-boundary-3_SRC = tests/userprog/sc-boundary-3.c       \
+tests/userprog/boundary.c tests/main.c
+tests/userprog/halt_SRC = tests/userprog/halt.c tests/main.c
+tests/userprog/exit_SRC = tests/userprog/exit.c tests/main.c
+
+$(foreach prog,$(tests/userprog_PROGS),$(eval $(prog)_SRC += tests/lib.c))
+
+tests/userprog/args-single_ARGS = onearg
+tests/userprog/args-multiple_ARGS = some arguments for you!
+tests/userprog/args-many_ARGS = a b c d e f g h i j k l m n o p q r s t u v
+tests/userprog/args-dbl-space_ARGS = two  spaces!
