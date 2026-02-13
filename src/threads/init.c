@@ -90,6 +90,9 @@ pintos_init (void)
   thread_init ();
   console_init ();  
 
+  // my first experiment with pintos
+  printf ("Hello Bruce! This is my first OS experiment.\n");
+
   /* Greet user. */
   printf ("Pintos booting with %'"PRIu32" kB RAM...\n",
           init_ram_pages * PGSIZE / 1024);
