@@ -293,7 +293,7 @@ thread_exit (void)
   list_remove (&thread_current()->allelem);
   thread_current ()->status = THREAD_DYING;
   schedule ();
-  NOT_REACHED ();
+  NOT_REACHED (); 
 }
 
 /** Yields the CPU.  The current thread is not put to sleep and
